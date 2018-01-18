@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Visdown - Markdown for Visualisation</title>
+  <meta name="description" content="Create Simple Visualisation Charts with Markdown">
+
+  <script src="lib/vega.min.js"></script>
+  <script src="lib/vega-lite.min.js"></script>
+  <script src="lib/vega-embed.min.js"></script>
+  <script src="lib/marked.min.js"></script>
+  <script src="lib/yaml.min.js"></script>
+
+  <style>
+    #visdown-output {max-width: 800px; margin: 0 auto;}
+    #visdown-input {display: none;}
+  </style>
+</head>
+<body>
+
+<div id="visdown-input">
+
+#CodeHere
+
+
+
+```vis
+data:
+  url: data/notes.csv
+
+mark: line
+encoding:
+  x:
+    field: year
+    type: nominal
+  y:
+    field: money
+    type: Q
+    scale:
+     type: linear
+  color:
+    field: value
+    type: nominal
+    scale:
+     scheme: category20b
+
+```
+
+```vis
+data:
+  url: data/notes.csv
+
+mark: circle
+encoding:
+  x:
+    field: year
+    type: nominal
+  y:
+    field: money
+    type: Q
+    scale:
+     type: linear
+  color:
+    field: value
+    type: nominal
+    scale:
+     scheme: category20b
+
+```
+ #OR
+```vis
+data:
+    url: data/notes.csv
+height: 400
+width: 700
+transform:
+- filter: (datum.denom == 500) || (datum.year > 2010)
+mark: line
+encoding:
+    x:
+     field: year
+     type: nominal
+    y:
+     field: money
+     type: Q
+    color:
+     field: denom
+     type: N
+```
+#AND
+```vis
+data:
+    url: data/notes.csv
+height: 400
+width: 700
+transform:
+- filter: (datum.denom == 500) && (datum.year > 2010)
+mark: line
+encoding:
+    x:
+     field: year
+     type: nominal
+    y:
+     field: money
+     type: Q
+    color:
+     field: denom
+     type: N
+```
+
+
+#CALCULATE
+
+```vis
+width: 600
+data:
+   url: data/notes.csv
+transform:
+   - filter: (datum.denom == 500)
+   - bin: true
+     field: year
+     as: yearBin
+mark: bar
+encoding:
+   x:
+    field: yearBin
+    type: N
+   y:
+    field: money
+    type: Q
+   color:
+    field: denom
+    type: N
+```
+
+
+    #AGGREGATE
+
+```vis
+height: 400
+width: 700
+data:
+    url: data/notes.csv
+transform:
+- filter: datum.money > 0
+mark: point
+encoding:
+    x:
+     field: year
+     type: nominal
+    y:
+     field: money
+     aggregate: sum
+     type: Q
+     scale:
+      type: log
+```
+
+    #AGGREGATE 2
+
+```vis
+height: 400
+width: 700
+data:
+    url: data/notes.csv
+transform:
+- filter: datum.money > 0
+mark: point
+encoding:
+    x:
+     field: year
+     type: nominal
+    y:
+     field: money
+     aggregate: count
+     type: Q
+     scale:
+      type: log
+```
+
+#personal data and reading-habits-analysis
+---
+data:
+  url: "https://github.com/DarthElevator/reading-habits-analysis"
+description: "a scatter plot showing the number of recommends and images an article has"
+encoding:
+  x:
+    field: recommends/shares
+    type: quantitative
+  ? "y"
+  :
+    field: "image count"
+    type: quantitative
+mark: circle
+
+#end of project
+
+
+
+</div>
+<div id="visdown-output"></div>
+<script src="visdown.js"></script>
+
+</body>
+</html>
