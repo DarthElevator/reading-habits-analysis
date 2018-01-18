@@ -4,6 +4,8 @@ This project attempts to analyse my reading habits. This is a personal data proj
 I want to understand the following things
 
 1) What genre of articles do I read?
-2) Do articles with more images attract me or does that not matter?
-3) What authors do I repeatedly read, if any? What are the commonalities
+2) Do I find articles with more images, more engaging? 
+3) What authors do I repeatedly read, if any? What are the commonalities?
 4) Do recommends matter in my reading consumption ?
+5) What emotion did reading that article trigger? Did it invite self reflection, happiness, sadness, nostalgia, empathy?
+
